@@ -11,10 +11,11 @@ import modelo.Conexion;
 
 public class Direcciones_DAO {
 	
+	 
 	
 ///atributos///
 	
-	Direcciones_DTO direcciones;
+	
 	private final String sqlS1="SELECT * FROM Usuarios;";
 	
 	private static PreparedStatement psS1 = null;
@@ -25,6 +26,7 @@ public class Direcciones_DAO {
 ///constructores////
 	public Direcciones_DAO() {
 		con = Conexion.connectDatabase();	
+		//direcciones = new ArrayList<Direcciones_DTO>();
 	}
 	
 	
@@ -38,19 +40,18 @@ public class Direcciones_DAO {
 	
 	
 	
-	public void guardaDirecciones(){
+	public void guardaDirecciones(Direcciones_DTO direccion){
 		
-		for (int i = 0; i < direcciones.getDirecciones().size() ; i++)
-		{
+	
 			
 			try {
 					psS1 = con.prepareStatement("INSERT INTO direcciones VALUES (?,?,?,?,?)");
 					
 					psS1.setString(1,"direcciones_seq.nextval");
-					psS1.setString(2,"");
-					psS1.setString(3,direcciones.getDirecciones().get(i).getCalle());
-					psS1.setInt(4,direcciones.getDirecciones().get(i).getNumExt());
-					psS1.setString(5,direcciones.getDirecciones().get(i).getColonia());
+					psS1.setString(2,"adoptantes_seq.nextval");
+					psS1.setString(3,direccion.getCalle());
+					psS1.setInt(4,direccion.getNumExt());
+					psS1.setString(5,direccion.getColonia());
 					
 			   } catch (SQLException e)
 				{
@@ -58,7 +59,7 @@ public class Direcciones_DAO {
 				   e.printStackTrace();
 				}
 			
-		}
+		
 		
 	}
 	
